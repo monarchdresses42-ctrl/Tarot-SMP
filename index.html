@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tarot SMP | Leader Election</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080d12;color:#f5f7f9;font-family:Arial,sans-serif}
+.page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 50% 0,#263744 0,#080d12 55%)}
+.card{width:min(760px,100%);background:rgba(16,23,30,.94);border:1px solid #344452;border-radius:26px;overflow:hidden;box-shadow:0 25px 80px #0009}
+.heroimg{width:100%;display:block}.body{padding:28px}
+h1{font-size:clamp(30px,7vw,54px);margin:0 0 8px;text-align:center}h2{font-size:28px;margin:0 0 16px}
+.center{text-align:center}.muted{color:#aebbc5;line-height:1.6}.badge{display:inline-block;padding:7px 12px;border:1px solid #536473;border-radius:999px;font-size:12px;letter-spacing:1px;color:#d4dde3;margin-bottom:18px}
+button{width:100%;padding:15px;border:0;border-radius:13px;background:#66d35b;color:#071007;font-weight:800;font-size:16px;cursor:pointer;margin-top:16px}
+button:hover{filter:brightness(1.08)}.rules{line-height:1.8;color:#dbe3e8;padding-left:22px}.rules li{margin:9px 0}
+.notice{background:#18232c;border:1px solid #2d3b47;border-radius:12px;padding:13px;color:#b9c5cd;margin:16px 0;font-size:14px}
+.candidate{display:flex;align-items:center;gap:14px;padding:15px;margin:9px 0;background:#19242d;border:1px solid #30404c;border-radius:14px;cursor:pointer}
+.candidate:hover{border-color:#667987}.candidate input{transform:scale(1.3);accent-color:#66d35b}.candidate label{font-size:18px;font-weight:700;flex:1;cursor:pointer}
+.hidden{display:none}.success{text-align:center;padding:30px 0}.check{font-size:64px}.tiny{font-size:12px;color:#8998a3}
+</style>
+</head>
+<body>
+<div class="page"><main class="card">
+<img class="heroimg" src="tarot-hero.svg" alt="Tarot SMP Leader Election">
+<div class="body">
+
+<section id="cover">
+<div class="center"><span class="badge">WELCOME</span><h1>Welcome to Tarot SMP</h1><p class="muted">Official Leader Election</p></div>
+<button onclick="go('rules')">Continue →</button>
+</section>
+
+<section id="rules" class="hidden">
+<span class="badge">STEP 2 • RULES</span><h2>Voting Rules</h2>
+<ul class="rules">
+<li>You can vote for <b>only ONE player.</b></li>
+<li>You can vote <b>only ONCE.</b></li>
+<li>Once your vote is submitted, you <b>CANNOT change it.</b></li>
+<li>Choose your candidate carefully before submitting.</li>
+<li>Every player gets <b>one equal vote.</b></li>
+</ul>
+<div class="notice">Please read the rules carefully before continuing.</div>
+<button onclick="go('vote')">I Understand →</button>
+</section>
+
+<section id="vote" class="hidden">
+<span class="badge">STEP 3 • ELECTION</span><h2>🗳️ Choose Your Leader</h2>
+<p class="muted">Select one candidate and submit your final vote.</p>
+<div id="list"></div>
+<button onclick="submitVote()">Submit My Final Vote</button>
+</section>
+
+<section id="submitted" class="hidden success">
+<div class="check">✅</div><h2>Your Vote Has Been Submitted</h2>
+<p class="muted">Thank you for voting!</p>
+<p class="tiny">This browser has been marked as voted. You cannot vote again from this browser unless its site data is cleared.</p>
+</section>
+
+</div></main></div>
+<script>
+const names=["Karnik","Advik","Anushrav","Danish","Abdul","Agastya","Arnav","Anik"];
+const KEY="tarot_smp_final_vote_2026";
+function go(id){["cover","rules","vote","submitted"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden");scrollTo(0,0)}
+document.getElementById("list").innerHTML=names.map((n,i)=>`<div class="candidate" onclick="document.getElementById('p${i}').checked=true"><input id="p${i}" type="radio" name="p" value="${n}"><label for="p${i}">${n}</label></div>`).join("");
+function submitVote(){let x=document.querySelector('input[name=p]:checked');if(!x){alert("Please select one candidate.");return}if(localStorage.getItem(KEY)){go("submitted");return}localStorage.setItem(KEY,"submitted");go("submitted")}
+if(localStorage.getItem(KEY))go("submitted");
+</script>
+</body></html>

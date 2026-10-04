@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650">
+<defs>
+ <radialGradient id="bg"><stop stop-color="#334452"/><stop offset="1" stop-color="#0b1015"/></radialGradient>
+ <linearGradient id="gold" x1="0" x2="1"><stop stop-color="#d7b56d"/><stop offset=".5" stop-color="#fff0b0"/><stop offset="1" stop-color="#b98a3e"/></linearGradient>
+</defs>
+<rect width="1200" height="650" fill="url(#bg)"/>
+<circle cx="600" cy="300" r="210" fill="#111820" stroke="url(#gold)" stroke-width="4"/>
+<path d="M600 130 L640 245 L760 245 L665 315 L700 430 L600 360 L500 430 L535 315 L440 245 L560 245 Z" fill="none" stroke="url(#gold)" stroke-width="7"/>
+<text x="600" y="515" text-anchor="middle" fill="#fff" font-family="Arial" font-size="62" font-weight="700" letter-spacing="5">TAROT SMP</text>
+<text x="600" y="565" text-anchor="middle" fill="#c8d2da" font-family="Arial" font-size="25" letter-spacing="7">LEADER ELECTION</text>
+</svg>
